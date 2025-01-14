@@ -1,3 +1,4 @@
+import 'package:aplicacio_tasques2425/components/dialog_nova_tasca.dart';
 import 'package:aplicacio_tasques2425/components/item_tasca.dart';
 import 'package:flutter/material.dart';
 
@@ -16,18 +17,25 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
     {"titol": "tasca69", "valor": false},
   ];
   void canviaCheckbox(int posLlista) {
-
     setState(() {
- //     if (valorCheckbox) {
-   //           tasquesLlista[posLlista]["valor"] = false;
-     // } else {
-       //       tasquesLlista[posLlista]["valor"] = true;
-     // }
-                   tasquesLlista[posLlista]["valor"] = !tasquesLlista[posLlista]["valor"];
-
+      //     if (valorCheckbox) {
+      //           tasquesLlista[posLlista]["valor"] = false;
+      // } else {
+      //       tasquesLlista[posLlista]["valor"] = true;
+      // }
+      tasquesLlista[posLlista]["valor"] = !tasquesLlista[posLlista]["valor"];
     });
-
   }
+
+  void crearNovaTasca() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return  const DialogNovaTasca();
+      },
+    );
+  }
+
   void accioEsborrarTasca(int posLlista) {
     setState(() {
       tasquesLlista.removeAt(posLlista);
@@ -50,7 +58,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         shape: const CircleBorder(),
-        onPressed: () {},
+        onPressed: crearNovaTasca,
         child: const Icon(
           Icons.add,
           color: Colors.white,
@@ -65,7 +73,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
               textTasca: tasquesLlista[index]["titol"],
               valorRebut: tasquesLlista[index]["valor"],
               canviaValorCheckbox: (valor) => canviaCheckbox(index),
-                  esborrarTasca: (valor) => accioEsborrarTasca(index),
+              esborrarTasca: (valor) => accioEsborrarTasca(index),
             );
           }),
     );
