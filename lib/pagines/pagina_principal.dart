@@ -13,8 +13,26 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
     {"titol": "tasca1", "valor": false},
     {"titol": "tasca2", "valor": true},
     {"titol": "tasca3", "valor": false},
-    {"titol": "tasca69", "valor": true},
+    {"titol": "tasca69", "valor": false},
   ];
+  void canviaCheckbox(int posLlista) {
+
+    setState(() {
+ //     if (valorCheckbox) {
+   //           tasquesLlista[posLlista]["valor"] = false;
+     // } else {
+       //       tasquesLlista[posLlista]["valor"] = true;
+     // }
+                   tasquesLlista[posLlista]["valor"] = !tasquesLlista[posLlista]["valor"];
+
+    });
+
+  }
+  void accioEsborrarTasca(int posLlista) {
+    setState(() {
+      tasquesLlista.removeAt(posLlista);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +64,8 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
             return ItemTasca(
               textTasca: tasquesLlista[index]["titol"],
               valorRebut: tasquesLlista[index]["valor"],
+              canviaValorCheckbox: (valor) => canviaCheckbox(index),
+                  esborrarTasca: (valor) => accioEsborrarTasca(index),
             );
           }),
     );
